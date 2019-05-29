@@ -20,7 +20,8 @@ namespace ctu
             Console.WriteLine(string.Format("Playlist: {0} ", string.Join(",", a)));
             Console.WriteLine(string.Format("   Query: {0}",q));
             Console.WriteLine(string.Format("   Index: {0}", Search(a, q)));
-            Console.WriteLine(string.Format("  A Size: {0}\n   Count: {1}",a.Length, count));
+            Console.WriteLine(string.Format("  A Size: {0}",a.Length));
+            Console.WriteLine(string.Format("   Count: {0}", count));
 
             return 0;
         }
@@ -38,7 +39,7 @@ namespace ctu
                 return -1;
 
             // Check for q in the p sublists
-            for (int i = 0; i < p; i++)
+            for (int i = p-1; i >= 0; i--)
             {
                 count ++;
                 // get the current index to compare to
@@ -46,11 +47,12 @@ namespace ctu
                 // Check for array bounds
                 if ( index > a.Length-1 )
                     return -1;
-                // Compare index contents to q
+                // Compare index contents to q.
                 if ( a[index].ToLower() == q.ToLower())
                     return index;
 
             }
+
             // Nothing found so Search at next iteration
             return Search(a, q, iter + 1, p);
         }
